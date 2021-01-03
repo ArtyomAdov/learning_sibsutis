@@ -1,0 +1,23 @@
+#!/bin/bash
+rm temp_key.txt;
+touch temp_key.txt;
+echo "None" >> temp_key.txt;
+gcc -O0 -Wall -o key acs_2.c -lm;
+./key;
+rm temp_key.txt;
+touch temp_key.txt;
+echo "-O1" >> temp_key.txt;
+gcc -O1 -Wall -o key acs_2.c -lm;
+./key;
+rm temp_key.txt;
+touch temp_key.txt;
+echo "-O2" >> temp_key.txt;
+gcc -O2 -Wall -o key acs_2.c -lm;
+./key;
+rm temp_key.txt;
+touch temp_key.txt;
+echo "-O3" >> temp_key.txt;
+gcc -O3 -Wall -o key acs_2.c -lm;
+./key;
+rm temp_key.txt;
+rm key;

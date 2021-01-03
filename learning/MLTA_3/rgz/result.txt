@@ -1,0 +1,9 @@
+1) 5 ballov
+2) 2 balla
+3) 3 balla
+4) 3 balla
+5) 2 balla
+6) 4 balla
+7) 2 balla
+8) 7 ballov
+all) 28/35 ballov

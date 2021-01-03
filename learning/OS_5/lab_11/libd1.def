@@ -1,0 +1,4 @@
+LIBRARY libd1
+EXPORTS
+	d @1
+	s @2

@@ -1,0 +1,3 @@
+For Thread.exe:
+> cl /EHsc Thread.cpp user32.lib gdi32.lib
+> Thread.exe

@@ -1,0 +1,3 @@
+LIBRARY libevd1
+EXPORTS
+sh @1

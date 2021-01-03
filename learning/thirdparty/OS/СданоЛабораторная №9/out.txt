@@ -1,0 +1,6 @@
+Count of threads: 8
+Count of iterations of thread: 10000
+Result of programm: 80000
+Worktime for algoritm Peterson: 68.858
+Result of programm: 80000
+Worktime for WinAPI: 62.691

@@ -1,0 +1,12 @@
+#ifndef DEATH_MAIN_ARG_H
+
+#define DEATH_MAIN_ARG_H
+
+#define INDEX_LENGTH_SQUARE_MATRIX_FROM_ARGV 1
+#define INDEX_QUANTITY_THREAD_FROM_ARGV 2
+
+#define MINIMAL_QUANTITY_ARGUMENT_IN_MAIN 3
+
+int Check_Argc(int argc);
+
+#endif

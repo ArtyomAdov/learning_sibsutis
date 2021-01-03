@@ -1,0 +1,6 @@
+#PBS -N MyOpenMP
+#PBS -l nodes=1:ppn=8
+#PBS -j oe
+
+export OMP_NUM_TREADS=8
+./main

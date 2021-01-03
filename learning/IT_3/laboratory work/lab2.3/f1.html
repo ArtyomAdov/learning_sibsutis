@@ -1,0 +1,28 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+<TITLE>Лабораторная 2.3</TITLE>
+</HEAD>
+<script language ="JavaScript">
+function sqr()
+{
+var a = Number(document.getElementById("side").value);
+
+document.getElementById("square").value = a*a;
+}
+</script>
+
+<BODY ALIGN = center BGCOLOR = "#EE82EE">
+<font face = "Times New Roman">
+<H1 ALIGN = center> Вычисление площади </H1>
+<P align = left>Автоматически</P>
+<FORM ALIGN = left METHOD=POST>
+<P>Сторона:
+<input type="textbox" id="side" onKeyUp="sqr()">
+<P>Площадь:
+<input type="textbox" id="square">
+</FORM>
+</font>
+</BODY>
+
+</HTML>

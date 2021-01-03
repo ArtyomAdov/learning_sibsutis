@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:template match="/">
+    <body>
+      <table
+        width="80%"
+        bgcolor="white"
+        align="center"
+        border="1"
+        cellpadding="2"
+      >
+        <tr bgcolor="#AFEEEE" style="font-weight: 600; text-align: center;">
+          <td>№</td>
+          <td>Название</td>
+          <td>Расстояние от солнца(а.е)</td>
+          <td>Период обращения(г.)</td>
+          <td>Период вращения вокруг своей оси(ч.)</td>
+          <td>Масса относительно Земли</td>
+          <td>Диаметр(км.)</td>
+          <td>Количество спутников</td>
+        </tr>
+        <xsl:for-each select="solar/planet">
+          <xsl:sort
+            order="ascending"
+            select="satellite_number"
+            data-type="number"
+          />
+          <xsl:sort order="ascending" select="@caption" data-type="text" />
+          <tr bgcolor="#AFEEEE" style="text-align: center;">
+            <xsl:if test="diametr &gt; 10000">
+              <xsl:attribute name="bgcolor">#7CFC00</xsl:attribute>
+            </xsl:if>
+            <td><xsl:value-of select="position()"/></td>
+            <td style="font-weight: 600;"><xsl:value-of select="@caption"/></td>
+            <td><xsl:value-of select="distance"/></td>
+            <td><xsl:value-of select="circulation_period"/></td>
+            <td><xsl:value-of select="revolution_period"/></td>
+            <td><xsl:value-of select="weight"/></td>
+            <td><xsl:value-of select="diametr"/></td>
+            <td><xsl:value-of select="satellite_number"/></td>
+          </tr>
+        </xsl:for-each>
+      </table>
+    </body>
+  </xsl:template>
+</xsl:stylesheet>

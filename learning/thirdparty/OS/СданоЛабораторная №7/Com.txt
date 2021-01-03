@@ -1,0 +1,7 @@
+For export.exe:
+> cl export.cpp imagehlp.lib
+> export.exe kernel32.dll
+
+For import.exe:
+> cl import.cpp imagehlp.lib
+> import.exe

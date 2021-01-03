@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Собери картинку из фрагментов</title>
+    <style>
+      body {
+        padding: 20px;
+      }
+
+      .row {
+        display: flex;
+        height: 160px;
+      }
+
+      .col {
+        width: 90px;
+        border: 1px solid #000;
+      }
+
+      .images img {
+        width: 100px;
+        border: 1px solid #000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="puzzle">
+      <div class="row">
+        <div class="col"></div>
+        <div class="col"></div>
+      </div>
+      <div class="row">
+        <div class="col"></div>
+        <div class="col"></div>
+      </div>
+    </div>
+    <p>Собери картинку из фрагментов:</p>
+    <div class="images">
+      <img id="slice_0_0" draggable="true" src="images/slice_0_0.gif" />
+      <img id="slice_0_1" draggable="true" src="images/slice_0_1.gif" />
+      <img id="slice_0_2" draggable="true" src="images/slice_0_2.gif" />
+      <img id="slice_0_3" draggable="true" src="images/slice_0_3.gif" />
+    </div>
+    <div class="button">
+	<input id="clickMe" type="button" value="Start" onclick="start();"/>
+    </div>
+     <script>
+      start=()=>
+	{
+        const dragstart = function(event) {
+          event.dataTransfer.setData("text", event.target.id);
+        };
+        const dragover = function(event) {
+          if (event.target.nodeName.toLowerCase() === "img") {
+            return true;
+          }
+          event.preventDefault();
+        };
+        const drop = function(event) {
+          event.preventDefault();
+          let imageId = event.dataTransfer.getData("text");
+          event.target.appendChild(document.getElementById(imageId));
+        };
+        const cells = document.getElementsByClassName("col");
+        Array.from(cells).forEach(element => {
+          element.addEventListener("dragover", dragover);
+          element.addEventListener("drop", drop);
+        });
+        const images = document.getElementsByTagName("img");
+        Array.from(images).forEach(element => {
+          element.addEventListener("dragstart", dragstart);
+        });
+      }
+    </script>
+  </body>
+</html>

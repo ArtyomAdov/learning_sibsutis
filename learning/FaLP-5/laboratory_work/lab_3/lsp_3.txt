@@ -1,0 +1,25 @@
+;Adov_&_Bobova; laboratory_work_3; variant_4
+;task_2
+(defun subset(a b)
+	(cond ((null a))
+		((member (car a) b) (subset(cdr a) b))
+		(t nil)))
+
+(subset '(a b c) '(d a b g c))
+(subset '(1 2 3 4 5 6 7) '(1 2 3 4 5))
+
+;task_7
+(defun dif_sum(a b)
+	(append
+		(remove-if (lambda(x) (member x b)) a)
+		(remove-if (lambda(x) (member x a)) b)))
+
+(dif_sum '(1 2 3 4 5 6) '(1 2 3 7))
+
+;task_12
+
+(defun map_list(a b)
+	(print(cond((null a) (cdr a))
+		(t(cons(apply 'funcall (cons b a)) (map_list(cdr a) b))))))
+
+(map_list '(1 2 3 4 5 6) '+)

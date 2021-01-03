@@ -1,0 +1,12 @@
+degemm_def
+				Time = 2.725586 sec;
+dgemm_transpose
+				Time = 1.485060 sec; Speedup = 1,835337293
+dgemm_block
+	BS = 2;		Time = 2.147369 sec; Speedup = 1,269267648
+	BS = 4;		Time = 1.270500 sec; Speedup = 2,145286108
+	BS = 8;		Time = 1.169880 sec; Speedup = 2,329799638
+	BS = 16;	Time = 1.085877 sec; Speedup = 2,510031983
+	BS = 32; 	Time = 1.052944 sec; Speedup = 2,588538422
+	BS = 64; 	Time = 1.057346 sec; Speedup = 2,577761679
+	BS = 128; 	Time = 1.064841 sec; Speedup = 2,559617821

@@ -1,0 +1,7 @@
+For 8.1.exe:
+> cl /EHsc 8.1.cpp user32.lib gdi32.lib
+> 8.1.exe
+
+For 8.2.exe:
+> cl /EHsc 8.2.cpp user32.lib gdi32.lib
+> 8.2.exe

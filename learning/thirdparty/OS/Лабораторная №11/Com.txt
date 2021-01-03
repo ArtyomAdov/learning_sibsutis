@@ -1,0 +1,24 @@
+for libevd1.lib and libevd1.exp:
+ > cl /c libevd1.cpp 
+ > link /DLL /DEF:libevd1.def libevd1.obj 
+
+for evd1.exe:
+ > cl evd1.cpp
+
+for evd11.exe:
+ > cl evd11.cpp
+
+for ev2.exe:
+ > cl ev2.c
+
+
+
+for libd2.lib and libd2.exp:
+ > cl /c libd2.cpp 
+ > link /DLL /DEF:libd2.def libd2.obj 
+
+for pd22.exe:
+ > cl pd22.cpp
+
+for pd2.exe:
+ > cl pd2.cpp

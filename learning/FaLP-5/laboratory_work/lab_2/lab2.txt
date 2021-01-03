@@ -1,0 +1,20 @@
+; Adov_&_Bobova; laboratory_work_2; variant_4
+
+;task_4
+(defun add (s a)
+  (mapcar (lambda (x) (if (numberp x) (+ x a) x)) s))
+(add '(a -1 6 v 3) 3)
+
+;task_14
+(defun convert(s)
+	(cond ((null s) nil)
+		((member (car s) (cdr s)) (convert(cdr s)))
+		(t (cons (car s) (convert (cdr s))))))
+(convert '(a b a a c c))
+
+;task_24
+(defun task (s)
+    (cond
+        ((null s) nil)
+        (t (append (remove-if-not (lambda (x) (equal (car s) x)) s) (task (remove (car s) s))))))
+ (task '(1 5 2 1 4 3 1 2 4 5 4))

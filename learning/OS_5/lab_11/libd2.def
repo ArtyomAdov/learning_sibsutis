@@ -1,0 +1,3 @@
+LIBRARY libd2
+EXPORTS
+	shareTest @1

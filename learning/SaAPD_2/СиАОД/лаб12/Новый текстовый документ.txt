@@ -1,0 +1,12 @@
+
+/*void FillIncQ (int a[], int n) {
+    a[0]=rand()%20-10;
+    for (int i=1; i<n; i++) a[i]=a[i-1]+rand()%4;
+}
+void FillDecQ (int a[], int n) {
+    a[0]=rand()%20+10;
+    for (int i=1; i<n; i++) a[i]=a[i-1]-rand()%4;
+}
+void FillRandQ (int a[], int n) {
+    for (int i=0; i<n; i++) a[i]=rand()%20-10;
+}*/

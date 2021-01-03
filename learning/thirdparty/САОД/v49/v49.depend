@@ -1,0 +1,33 @@
+# depslib dependency file v1.0
+1481961765 source:c:\users\wensone\desktop\1930(паша)\base.cpp
+	"Base.h"
+
+1481961713 c:\users\wensone\desktop\1930(паша)\base.h
+	<iostream>
+	<fstream>
+	<cstdlib>
+	<iomanip>
+	<cstring>
+	"DB.h"
+	"B.h"
+	"queue.hpp"
+
+1481959901 c:\users\wensone\desktop\1930(паша)\db.h
+
+1481959898 c:\users\wensone\desktop\1930(паша)\queue.hpp
+	"DB.h"
+	"iostream"
+	"iomanip"
+
+1481962150 source:c:\users\wensone\desktop\1930(паша)\b.cpp
+	"B.h"
+
+1481961700 c:\users\wensone\desktop\1930(паша)\b.h
+	"DB.h"
+	"queue.hpp"
+	<stdio.h>
+
+1481961989 source:c:\users\wensone\desktop\1930(паша)\main.cpp
+	"Base.h"
+	<cstdlib>
+

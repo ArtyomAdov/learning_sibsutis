@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1479736046 source:c:\users\wensone\desktop\v9\1930\db.cpp
+	"DB.h"
+
+1479828314 c:\users\wensone\desktop\v9\1930\db.h
+
+1479829581 source:c:\users\wensone\desktop\v9\1930\main.cpp
+	"Base.h"
+
+1479830680 c:\users\wensone\desktop\v9\1930\base.h
+	<iostream>
+	<fstream>
+	<cstdlib>
+	<iomanip>
+	<cstring>
+	"DB.h"
+
+1479830640 source:c:\users\wensone\desktop\v9\1930\base.cpp
+	"Base.h"
+

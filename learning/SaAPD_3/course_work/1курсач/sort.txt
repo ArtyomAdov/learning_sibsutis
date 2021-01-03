@@ -1,0 +1,149 @@
+struct Data
+{
+	char Name[30];
+	short int departmentNumber;
+	char place[22];
+	char birthDate[10];
+};
+
+void QuickSortDN(Data** data, int left, int right)
+{
+	int i = left, j = right;
+	Data* temp;
+	Data* k = data[i];
+	while (i <= j)
+	{
+		while (data[i]->departmentNumber < k->departmentNumber)
+		{
+			i++;
+		}
+		while (data[j]->departmentNumber > k->departmentNumber)
+		{
+			j--;
+		}
+		if (i <= j)
+		{
+			temp = data[i];
+			data[i] = data[j];
+			data[j] = temp;
+			i++;
+			j--;
+		}
+	}
+	if (left < j)
+	{
+		QuickSortDN(data, left, j);
+	}
+	if (i < right)
+	{
+		QuickSortDN(data, i, right);
+	}
+}
+
+void QuickSortName(Data** data, int left, int right)
+{
+	int i = left, j = right;
+	Data* temp;
+	Data* k = data[i];
+	while (i <= j)
+	{
+		while ((string)data[i]->Name < (string)k->Name)
+		{
+			i++;
+		}
+		while ((string)data[j]->Name > (string)k->Name)
+		{
+			j--;
+		}
+		if (i <= j)
+		{
+			temp = data[i];
+			data[i] = data[j];
+			data[j] = temp;
+			i++;
+			j--;
+		}
+	}
+	if (left < j)
+	{
+		QuickSortName(data, left, j);
+	}
+	if (i < right)
+	{
+		QuickSortName(data, i, right);
+	}
+}
+
+void printStruct(Data** data, int start, int end) {
+	for (int i = start; i < end; i++) {
+		cout << i + 1 << ")	";
+		cout << data[i]->Name << "\t";
+		cout << data[i]->departmentNumber << "\t";
+		cout << data[i]->place << "\t";
+		cout << data[i]->birthDate << "\t";
+		cout << endl;
+	}
+} 
+
+void CreateMas(Data** f, size_t dataNum) {
+	int i = 0;
+	int j = 0;
+	while(i < dataNum - 1)
+	{
+		while (i < dataNum - 1 && f[i]->departmentNumber == f[i + 1]->departmentNumber) 
+		{
+			i++;
+		}
+		QuickSortName(f, j, i);
+		j = i + 1;
+		i++;
+	}
+}
+
+int main() 
+{
+	ifstream dataBase("testBase2.dat", ios::out | ios::binary);
+
+	dataBase.ignore(numeric_limits<streamsize>::max());
+	streamsize length = dataBase.gcount();
+	dataBase.clear();
+	dataBase.seekg(0, ios_base::beg);
+
+	if (!dataBase) 
+	{
+		cout << "Not found";
+		dataBase.clear();
+		return 1;
+	}
+
+	size_t dataNum = length / sizeof(Data);
+
+	Data* data = new Data[dataNum];
+
+	short int* temp = new short int[sizeof(short int)];
+
+	Data** f = new Data* [dataNum];
+	for (int i = 0; i < dataNum; i++) 
+	{
+		f[i] = &data[i];
+	}
+
+	for (int i = 0; i < dataNum; i++) 
+	{
+		dataBase.read(data[i].Name, sizeof(data[i].Name));
+		for (int j = 0; j < sizeof(data[i].departmentNumber); j++) 
+		{
+			temp[j] = dataBase.get();
+		}
+		data[i].departmentNumber = temp[0] + temp[1];
+		dataBase.read(data[i].place, sizeof(data[i].place));
+		dataBase.read(data[i].birthDate, sizeof(data[i].birthDate));
+	}
+
+	int start = 0;
+	int end = 20;
+	bool exit = false;
+
+	QuickSortDN(f, start, dataNum - 1);
+	CreateMas(f, dataNum);
+	printStruct(f, start, end);

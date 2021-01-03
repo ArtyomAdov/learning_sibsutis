@@ -1,0 +1,367 @@
+--------------------------------
+;1)4
+(print(car(car(cdr(car(cdr '(1 (2 ( * 3 ) 4) 5)))))))
+;2)4
+(print(append '(+ 1 2) '())) 
+; СОЕДИНЯЕТ (+ 1 2) И () В ОДИН СПИСОК И В ИТОГЕ ПОЛУЧАЕМ (+ 1 2)
+;3)(4)a
+(print(cons '(1)(cons '(2 (3)) nil)))
+;3)(4)b
+(print(list '(1)(list '2 '(3))))
+;4)(4)
+(defun F (g)
+	(print(append(list(car g) (caddr g)) (list(car(cdr g)) (cadddr g)) (cddddr g))))
+	(F '(1 2 3 4 5))
+	(print '(Completed.))	
+---------------------------------
+;;2.4
+
+(defun add (w n &aux (a ( car w)))
+  (print(cond ((null w) nil)
+        ((numberp a) (cons (+ a n) (add (cdr w) n)))
+        (t (cons a (add (cdr w) n))))))
+ (add '(a -1 6 v 3) 3)
+(print `-------------------)
+ ;;2.14
+
+(defun convert(x)
+	(print(cond ((null x) nil)
+		((member (car x) (cdr x)) (convert(cdr x)))
+		(t (cons (car x) (convert (cdr x)))))))
+
+(convert '(a b a a c c))
+(print `-------------------)   
+
+;;2.24
+
+(defun sort (x)
+  (print (cond
+        ((null x) nil)
+        (t (append (remove-if-not #'(lambda (q) (equal (car x) q)) x)
+            (sort (remove (car x) x)))))))
+ 
+(sort '(1 5 2 1 4 3 1 2 4 5 4))
+(print `-------------------)   
+----------------------------------------------------
+(print '(Lab 3.1))
+
+(defun subset(a b)
+	(print(cond((null a))
+			((member (car a) b) (subset(cdr a)b))
+			(nil))))
+
+(subset '(a b c) '(d a b g c))
+
+
+(print '(Lab 3.2))
+
+(defun dif_sum(a b)
+	(print(cond
+		((null a)nil)
+		((not (member (car a) b)) (cons (car a) (dif_sum(cdr a) b)))
+		(t (dif_sum (cdr a) b)))))
+
+(dif_sum '(1 2 3 4 5 6) '(1 2 3 ))
+
+(print '(Lab 3.3))
+
+(defun map_list(a b)
+	(print(cond((null a)nil)
+		(t(cons(apply 'funcall (cons b a)) (map_list(cdr a) b))))))
+
+(map_list '(1 2 3 4 5 6) '*)
+-----------------------------------------------------------------------------------
+female(mary).
+female(liz).
+female(ann).
+male(john).
+male(bob).
+male(paul).
+male(sam).
+male(pat).
+parent(mary,bob).
+parent(john,bob).
+parent(mary,ann).
+parent(bob,liz).
+parent(bob,sam).
+parent(bob,paul).
+parent(paul,pat).
+
+mother(X,Y):-
+  parent(X,Y),female(X).
+
+father(X,Y):-
+  parent(X,Y),male(X).
+
+son(X,Y):-
+  parent(Y,X),male(X).
+
+douther(X,Y):-
+  parent(Y,X),female(X).
+
+brother(X,Y):-
+  parent(Z,X),parent(Z,Y),male(X),male(Y),X\=Y.
+
+sister(X,Y):-
+  parent(Z,X),parent(Z,Y),female(X),male(Y),X\=Y.
+
+grandson(X,Y):-
+  parent(Z,X),parent(Y,Z),male(X).
+
+aunt(X,Y):-
+  sister(X,Z),parent(Z,Y).
+
+hTwoChild(X):-
+  son(Y,X),douther(Z,X),female(X).
+
+successor(X):-
+  son(Y,X),male(X), X\=Y.
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+1)father(X,sam).
+2)write(mother(X,bob)).
+3)sister(X,sam).
+4)sister(X,liz).
+5)brother(X,bob).
+6)grandson(X,mary) + ;
+7)grandson(paul,Y) + ;
+8)aunt(X,sam).
+9)aunt(ann,Y). + ;
+10) hTwoChild(X).
+11)write(successor(bob)).
+------------------------------------------------
+%---------------------1-------------------------
+even(X) :- X mod 2 =:= 0.
+
+print_uneven(X, Y) :-
+	not(even(Y)),
+	write(Y), tab(1), fail.
+
+print_uneven(X, Y) :-
+	Y \== X, Y1 is Y - 1, print_uneven(X, Y1).
+
+uneven() :- read(X), read(Y), print_uneven(X, Y).
+
+
+%--------------------2-----------------------
+calc_sum(X, Y, Sum) :-
+	S is X + Sum,
+	X \== Y,
+	X1 is X + 1,
+	calc_sum(X1, Y, S).
+
+calc_sum(X, X, Sum) :- write(sum = Sum).
+
+sum() :-
+		read(X),
+		read(Y),
+		Y1 is Y + 1,
+		calc_sum(X, Y1, 0).
+
+%------------------------3--------------------------
+find_min_digit(0, Min) :- write(Min).
+
+find_min_digit(X, Min) :-
+	D is X mod 10,
+	X1 is X div 10,
+	D < Min,
+	find_min_digit(X1, D).
+
+find_min_digit(X, Min) :-
+	X1 is X div 10,
+	find_min_digit(X1, Min).
+
+min_digit() :-
+	read(X),
+	X \= 0,
+	X1 is abs(X),
+	find_min_digit(X1, 9).
+
+min_digit() :- write(0).
+
+%--------------------------4-------------------------
+calc_fibonacci(0, Y) :- Y is 1, !.
+calc_fibonacci(1, Y) :- Y is 1, !.
+
+calc_fibonacci(X, Y) :-
+	X1 is X - 2,
+	X2 is X - 1,
+	calc_fibonacci(X1, Y1),
+	calc_fibonacci(X2, Y2),
+	Y is Y1 + Y2.
+
+fibonacci() :-
+	repeat,
+	read(X),
+	(X < 0, !; calc_fibonacci(X, Y), write(Y), nl, fail).
+----------------------------------------------------------------------
+%------------1--------------
+read_list_def:-
+  write('Введи список List:'),nl,
+  read(List),
+  write('Введи границы X,Y:'),nl,
+  read(X),read(Y),
+  list_making(X,Y,Min,Max),
+  split_list(List,Min,Max,List1,List2,List3),
+  write(List1),write(List2),writeln(List3).
+
+list_making(X,Y,Min,Max):-
+  X>Y, !, Max = X, Min = Y; Max = Y, Min = X.
+
+split_list([], _X, _Y, [], [], []).
+
+split_list([Head|Tail], X, Y, [Head|List1], List2, List3):-
+    Head < X, !, split_list(Tail, X, Y, List1, List2, List3).
+split_list([Head|Tail], X, Y, List1, [Head|List2], List3):-
+    Head =< Y, !, split_list(Tail, X, Y, List1, List2, List3).
+split_list([Head|Tail], X, Y, List1, List2, [Head|List3]):-
+    !, split_list(Tail, X, Y, List1, List2, List3).
+
+%------------------2---------------------
+maximum:-
+    write('Введи список A:'),nl,
+    read(A),
+    maxlist(A, Max),
+    list_max(A,B, Max, 1),
+    writeln(B).
+
+    maxlist([],0).
+
+    maxlist([Head|Tail],Max) :-
+    maxlist(Tail,TailMax),
+    Head > TailMax,
+    Max is Head.
+
+    maxlist([Head|Tail],Max) :-
+    maxlist(Tail,TailMax),
+    Head =< TailMax,
+    Max is TailMax.
+
+    list_max([],[], _, _).
+
+    list_max([Head|Tail], [N|B], Max, N):-
+        Head =:= Max, !, N1 is N + 1, list_max(Tail, B, Max, N1).
+    list_max([Head|Tail], B, Max, N):-
+        Head =\= Max, !, N1 is N + 1, list_max(Tail, B, Max, N1).
+
+%------------------3---------------------
+frequency:-
+  write('Введи список List:'),nl,
+  read(List),
+  bubble_sort(List, Sort_List),
+  seek(Sort_List, _, ResList),
+  write(ResList).
+
+	seek([], 0, []).
+	seek([H|B], K, [H]) :-
+		helper([H|B], H, K, List), seek(List, Max, _), K > Max, !.
+	seek([H|B], Max, List1) :-
+		helper([H|B], H, K, List), seek(List, Max, List1), K < Max, !.
+	seek([H|B], Max, [H|List1]) :-
+		helper([H|B], H, K, List), seek(List, Max, List1), K =:= Max, !.
+
+	helper([], _, 0, []) :- !.
+	helper([H|B], X, 0, [H|B]) :- H =\= X, !.
+	helper([H|B], X, K, B1) :-  H =:= X,  helper(B, X, K1, B1), K is K1 + 1.
+
+  move_max_to_end([], []):-!.
+  move_max_to_end([Head], [Head]):-!.
+  move_max_to_end([First, Second|Tail], [Second|ListWithMaxEnd]):-
+    First > Second, !,
+  move_max_to_end([First|Tail], ListWithMaxEnd).
+  move_max_to_end([First, Second|Tail], [First|ListWithMaxEnd]):-
+  move_max_to_end([Second|Tail], ListWithMaxEnd).
+
+  bubble_sort(SortedList, SortedList):-
+    move_max_to_end(SortedList, DoubleSortedList),
+    SortedList = DoubleSortedList, !.
+  bubble_sort(List, SortedList):-
+    move_max_to_end(List, SortedPart),
+    bubble_sort(SortedPart, SortedList).
+------------------------------------------------------------------------------------------
+1.2) list_to_set([1,1,2,2,3,3,4,4,5,5,6,6],X).
+2.2) goal.(к).
+3) start.  
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+goal:-
+  write('Введите нужную подстроку: '),nl,
+	read(STR),
+	open('in.txt', read, INTEXT),
+	set_input(INTEXT),
+	walk(INTEXT, L),
+	close(INTEXT),
+	findall(X, (member(X, L), sub_string(X, _, _, _, STR)), OUT),
+	(exists_file('out.txt'), delete_file('out.txt'), ! ; true),
+	open('out.txt', write, OUTFILE),
+	set_output(OUTFILE),
+	out(OUTFILE, OUT),
+	close(OUTFILE).
+
+walk(_, []):-
+	at_end_of_stream,
+	!.
+
+walk(F, [H|T]):-
+	read_line_to_codes(F, COD),
+	string_codes(H, COD),
+	walk(F, T).
+
+out(_, []):-
+	!.
+
+out(R,[H|T]):-
+	writeln(H),
+	out(R, T).
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+:-dynamic information/3.
+start:-consult('database.txt'),
+listing(information/3),
+show_menu.
+
+show_menu:-repeat,
+writeln('0 – Показать базу данных'),
+writeln('1 – Добавить запись в БД'),
+writeln('2 – Удалить запись из БД'),
+writeln('3 – Найти маршрут'),
+writeln('4 – Выход'),nl,
+write('Введите Ваш выбор: (1-4) '),
+read(X),
+nl,
+X<5,
+process(X),nl,
+X=4,!.
+
+process(0):-listing(information/3).
+
+process(1):-writeln('Тип Транспорта:'),
+read(Transport),
+writeln('Номер маршрута: '),
+read(Number),
+write('Остановки: '), read(Ost),
+assertz(information(Transport,Number,Ost)).
+
+process(2):-
+repeat,
+writeln('Хочешь удалить маршрут? (yes-да / no - для выхода)'),nl,
+read(Choice),nl,
+(Choice == yes ->
+  write('Тип транспорта'),nl,
+  read(Transport),nl,
+  writeln('Номер'),nl, read(Number),   retract(information(Transport,Number,N1)),nl;
+  write('Отмена'),!).
+% answer(n).
+% answer(_):-
+
+process(3):-writeln('Введите название остановки №1'),
+read(X),
+writeln('Введите название остановки №2'),
+read(Y),
+information(N1,N2,N3),
+member(X,N3),
+member(Y,N3),
+write(N1),
+write(' '),
+write(N2), nl, fail.
+process(4):-!.
+
+insert(X,L,[X|L]).
